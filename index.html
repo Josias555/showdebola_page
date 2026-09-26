@@ -80,48 +80,6 @@ section { padding: clamp(4rem, 9vw, 7rem) 0; position:relative; }
 }
 @media (hover:none),(max-width:1023px){ .cursor-dot,.cursor-ring{display:none} }
 
-/* LOADER (letras JM) */
-.loader {
-  position:fixed; inset:0; z-index:10000;
-  background: var(--bg);
-  display:flex; align-items:center; justify-content:center;
-  transition: opacity .6s ease, visibility .6s;
-}
-.loader.hidden { opacity:0; visibility:hidden; }
-.loader-inner { text-align:center; }
-.loader-logo {
-  font-family: var(--font-title);
-  font-size: clamp(4rem, 12vw, 7rem);
-  background: var(--gradient);
-  -webkit-background-clip:text; background-clip:text;
-  -webkit-text-fill-color:transparent;
-  letter-spacing: 8px;
-  align-items: center;
- width:42px;
-  height:42px;
-  margin-left: 85px;
-  animation: pulse 1.2s ease-in-out infinite;
-}
-.loader-club {
-  font-family: var(--font-head);
-  font-size:.9rem; letter-spacing:6px; color:var(--muted);
-  margin-top:.5rem;
-}
-.loader-bar {
-  width:180px; height:3px; background:var(--card-2);
-  margin: 1.5rem auto 0; border-radius:99px; overflow:hidden;
-}
-.loader-bar span {
-  display:block; height:100%; width:0;
-  background: var(--gradient);
-  animation: loadBar 1.5s ease forwards;
-}
-@keyframes loadBar { to { width:100%; } }
-@keyframes pulse {
-  0%,100% { opacity:.6; transform:scale(.98); }
-  50% { opacity:1; transform:scale(1); }
-}
-
 /* NAVBAR */
 .navbar {
   position:fixed; top:0; left:0; right:0; height:var(--nav-h);
@@ -865,13 +823,7 @@ footer {
 <body>
 
 <!-- ═══════════ LOADING SCREEN (JM) ═══════════ -->
-<div class="loader" id="loader">
-  <div class="loader-inner">
-    <div class="loader-logo"><img src="imagem/escudo.png" alt="Show de Bola FC" class="logo-escudo"></div>
-    <div class="loader-club">SHOW DE BOLA FC</div>
-    <div class="loader-bar"><span></span></div>
-  </div>
-</div>
+
 
 <!-- ═══════════ CURSOR PERSONALIZADO ═══════════ -->
 <div class="cursor-dot" id="cursorDot"></div>
@@ -1688,12 +1640,7 @@ footer {
    SHOW DE BOLA FC — JavaScript
 ══════════════════════════════════════════════════════════ */
 
-/* 1. LOADING SCREEN */
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('hidden');
-  }, 1500);
-});
+
 
 /* 2. CURSOR PERSONALIZADO */
 (function () {
