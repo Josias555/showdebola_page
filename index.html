@@ -451,7 +451,292 @@ section { padding: clamp(4rem, 9vw, 7rem) 0; position:relative; }
 }
 .match-place { color:var(--muted); font-size:.75rem; text-transform:uppercase; letter-spacing:1px; }
 .match-card .btn { position:relative; z-index:1; }
+/* ══════════════════════════════════════════════════════════
+   MELHOR JOGADOR DA PARTIDA (MVP)
+══════════════════════════════════════════════════════════ */
+.mvp-section {
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.mvp-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(600px circle at 20% 20%, rgba(220,38,38,.15), transparent 60%),
+    radial-gradient(700px circle at 80% 80%, rgba(30,64,175,.18), transparent 60%);
+  pointer-events: none;
+}
+.mvp-card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+  background: linear-gradient(135deg, var(--card) 0%, var(--card-2) 100%);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: clamp(1.8rem, 4vw, 3rem);
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,.5);
+}
+.mvp-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--gradient);
+}
+.mvp-card::after {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(220,38,38,.25), transparent 70%);
+  pointer-events: none;
+}
 
+/* Foto do MVP */
+.mvp-photo-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mvp-photo-ring {
+  position: relative;
+  width: clamp(200px, 24vw, 300px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 8px;
+  background: var(--gradient);
+  animation: mvpFloat 4s ease-in-out infinite;
+}
+.mvp-photo-ring::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: var(--gradient-soft);
+  filter: blur(30px);
+  z-index: -1;
+}
+@keyframes mvpFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.mvp-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--card-2);
+  border: 3px solid var(--bg);
+}
+.mvp-photo.sem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-size: 5rem;
+  color: rgba(255,255,255,.4);
+}
+
+/* Coroa/Troféu do MVP */
+.mvp-crown {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  color: #fff;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  box-shadow: 0 8px 25px rgba(251,191,36,.5), 0 0 0 4px var(--bg);
+  z-index: 3;
+  animation: crownPulse 2s ease-in-out infinite;
+}
+@keyframes crownPulse {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.1); }
+}
+
+/* Badge MVP */
+.mvp-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: var(--gradient);
+  color: #fff;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: .75rem;
+  letter-spacing: 2px;
+  padding: .4rem 1rem;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(220,38,38,.5);
+  border: 2px solid var(--bg);
+  z-index: 2;
+}
+
+/* Info do MVP */
+.mvp-info { position: relative; z-index: 1; }
+.mvp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: rgba(251,191,36,.12);
+  border: 1px solid rgba(251,191,36,.35);
+  color: #fbbf24;
+  font-family: var(--font-head);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: .4rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 1.2rem;
+}
+.mvp-eyebrow .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #fbbf24;
+  box-shadow: 0 0 10px #fbbf24;
+  animation: blink 1.5s infinite;
+}
+.mvp-name {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-bottom: .4rem;
+  text-transform: uppercase;
+}
+.mvp-name .numero {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-right: .5rem;
+}
+.mvp-position {
+  color: var(--muted);
+  font-family: var(--font-head);
+  font-size: .95rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
+.mvp-match-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem 1.5rem;
+  color: var(--muted);
+  font-size: .9rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.mvp-match-info span {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+.mvp-match-info strong { color: var(--white); font-weight: 600; }
+
+/* Estatísticas do MVP */
+.mvp-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .8rem;
+  margin-bottom: 1.6rem;
+}
+.mvp-stat {
+  text-align: center;
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: .9rem .5rem;
+  transition: transform .3s var(--ease), border-color .3s, background .3s;
+}
+.mvp-stat:hover {
+  transform: translateY(-4px);
+  border-color: rgba(220,38,38,.5);
+  background: rgba(220,38,38,.06);
+}
+.mvp-stat .valor {
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+.mvp-stat .label {
+  display: block;
+  color: var(--muted);
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: .3rem;
+  font-weight: 600;
+}
+
+/* Comentário do treinador */
+.mvp-comment {
+  background: rgba(255,255,255,.03);
+  border-left: 3px solid var(--red);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  font-style: italic;
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.6;
+  position: relative;
+}
+.mvp-comment::before {
+  content: '"';
+  position: absolute;
+  top: -8px;
+  left: 8px;
+  font-family: var(--font-title);
+  font-size: 3rem;
+  color: var(--red);
+  opacity: .4;
+  line-height: 1;
+}
+.mvp-comment-author {
+  display: block;
+  margin-top: .6rem;
+  font-style: normal;
+  font-family: var(--font-head);
+  font-weight: 600;
+  color: var(--white);
+  font-size: .8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .mvp-card { grid-template-columns: 1fr; text-align: center; }
+  .mvp-photo-ring { width: clamp(180px, 45vw, 240px); }
+  .mvp-match-info { justify-content: center; }
+}
+@media (max-width: 480px) {
+  .mvp-stats { grid-template-columns: repeat(2, 1fr); }
+  .mvp-name { font-size: 1.8rem; }
+}
 /* PLANTEL */
 .players-grid {
   display:grid; grid-template-columns: repeat(3, 1fr);
@@ -1014,7 +1299,70 @@ footer {
     </div>
   </div>
 </section>
+<!-- ═══════════ MELHOR JOGADOR DA PARTIDA (MVP) ═══════════ -->
+<section id="mvp" class="mvp-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Destaque</span>
+      <h2>Melhor Jogador da Partida</h2>
+      <p>Reconhecimento ao craque que brilhou no último jogo do Show de Bola FC.</p>
+    </div>
 
+    <div class="mvp-card reveal">
+      <!-- LADO ESQUERDO: FOTO -->
+      <div class="mvp-photo-wrap">
+        <div class="mvp-crown">🏆</div>
+        <div class="mvp-photo-ring">
+          <img src="imagem/111.jpeg" alt="MVP da Partida" class="mvp-photo">
+        </div>
+        <div class="mvp-badge">MVP</div>
+      </div>
+
+      <!-- LADO DIREITO: INFO -->
+      <div class="mvp-info">
+        <div class="mvp-eyebrow">
+          <span class="dot"></span> Melhor em Campo
+        </div>
+
+        <h3 class="mvp-name">
+          <span class="numero">Nº 11</span> Jacy
+        </h3>
+        <div class="mvp-position">Avançado · Show de Bola FC</div>
+
+        <div class="mvp-match-info">
+          <span><strong>26 Set 2026</strong></span>
+          <span> <strong>vs Gideão FC</strong></span>
+          <span> <strong>Vitória 0-5</strong></span>
+        </div>
+
+        <div class="mvp-stats">
+          <div class="mvp-stat">
+            <div class="valor">3</div>
+            <span class="label">Golos</span>
+          </div>
+          <div class="mvp-stat">
+            <div class="valor">0</div>
+            <span class="label">Assist.</span>
+          </div>
+          <div class="mvp-stat">
+            <div class="valor">90+'</div>
+            <span class="label">Golo Final</span>
+          </div>
+          <div class="mvp-stat">
+            <div class="valor">9.5</div>
+            <span class="label">Nota</span>
+          </div>
+        </div>
+
+        <div class="mvp-comment">
+          Marcou 3 golos decisivos, incluindo o da vitória aos 90+ minutos.
+          Uma verdadeira garra em campo!
+          <span class="mvp-comment-author">— Comissão Técnica</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- ═══════════ PLANTEL ═══════════ -->
 <section id="plantel">
   <div class="container">
@@ -1079,9 +1427,9 @@ footer {
           <h3>Celso</h3>
           <p class="player-meta">Idade: # · Altura: 1.84m</p>
            <div class="player-stats">
-            <div><strong>7</strong><span>Jogos</span></div>
-            <div><strong>9</strong><span>Cortes</span></div>
-            <div><strong>10</strong><span>Recuperação&Doelos ganho</span></div>
+            <div><strong>8</strong><span>Jogos</span></div>
+            <div><strong>14</strong><span>Cortes</span></div>
+            <div><strong>17</strong><span>Recuperação&Doelos ganho</span></div>
           </div>
         </div>
       </article>
@@ -1097,9 +1445,9 @@ footer {
           <h3>Ti Fulano</h3>
           <p class="player-meta">Idade: # · Altura: 1.92m</p>
            <div class="player-stats">
-            <div><strong>3</strong><span>Jogos</span></div>
-            <div><strong>8</strong><span>Cortes</span></div>
-            <div><strong>12</strong><span>Recuperação&Doelos ganho</span></div>
+            <div><strong>4</strong><span>Jogos</span></div>
+            <div><strong>16</strong><span>Cortes</span></div>
+            <div><strong>15</strong><span>Recuperação&Doelos ganho</span></div>
           </div>
         </div>
       </article>
@@ -1161,9 +1509,9 @@ footer {
           <h3>Eliezer</h3>
           <p class="player-meta">Idade: # · Altura: 1.70m</p>
            <div class="player-stats">
-            <div><strong>3</strong><span>Jogos</span></div>
-            <div><strong>9</strong><span>Cortes</span></div>
-            <div><strong>11</strong><span>Recuperação&Doelos ganho</span></div>
+            <div><strong>4</strong><span>Jogos</span></div>
+            <div><strong>15</strong><span>Cortes</span></div>
+            <div><strong>16</strong><span>Recuperação&Doelos ganho</span></div>
           </div>
         </div>
       </article>
@@ -1178,7 +1526,7 @@ footer {
           <h3>Josias Mabeka</h3>
           <p class="player-meta">Idade: # · Altura: 1.90m</p>
           <div class="player-stats">
-            <div><strong>8</strong><span>Jogos</span></div>
+            <div><strong>9</strong><span>Jogos</span></div>
             <div><strong>1</strong><span>Golos</span></div>
             <div><strong>2</strong><span>Assist.</span></div>
           </div>
@@ -1194,7 +1542,7 @@ footer {
           <h3>Exaucé .P</h3>
           <p class="player-meta">Idade: # · Altura: 1.72m</p>
           <div class="player-stats">
-            <div><strong>8</strong><span>Jogos</span></div>
+            <div><strong>9</strong><span>Jogos</span></div>
             <div><strong>2</strong><span>Golos</span></div>
             <div><strong>3</strong><span>Assist.</span></div>
           </div>
@@ -1226,8 +1574,8 @@ footer {
           <h3>Gabi-Sky</h3>
           <p class="player-meta">Idade: # · Altura: 1.90m</p>
           <div class="player-stats">
-            <div><strong>8</strong><span>Jogos</span></div>
-            <div><strong>1</strong><span>Golos</span></div>
+            <div><strong>9</strong><span>Jogos</span></div>
+            <div><strong>0</strong><span>Golos</span></div>
             <div><strong>2</strong><span>Assist.</span></div>
           </div>
         </div>
@@ -1242,7 +1590,7 @@ footer {
           <h3>Wilson</h3>
           <p class="player-meta">Idade: # · Altura: 1.70m</p>
           <div class="player-stats">
-            <div><strong>8</strong><span>Jogos</span></div>
+            <div><strong>9</strong><span>Jogos</span></div>
             <div><strong>0</strong><span>Golos</span></div>
             <div><strong>1</strong><span>Assist.</span></div>
           </div>
@@ -1277,8 +1625,8 @@ footer {
           <h3>Piza</h3>
           <p class="player-meta">Idade: # · Altura: 1.82m</p>
           <div class="player-stats">
-            <div><strong>8</strong><span>Jogos</span></div>
-            <div><strong>6</strong><span>Golos</span></div>
+            <div><strong>9</strong><span>Jogos</span></div>
+            <div><strong>8</strong><span>Golos</span></div>
             <div><strong>2</strong><span>Assist.</span></div>
           </div>
         </div>
@@ -1294,7 +1642,7 @@ footer {
           <p class="player-meta">Idade: # · Altura: 1.82m</p>
           <div class="player-stats">
             <div><strong>7</strong><span>Jogos</span></div>
-            <div><strong>2</strong><span>Golos</span></div>
+            <div><strong>5</strong><span>Golos</span></div>
             <div><strong>1</strong><span>Assist.</span></div>
           </div>
         </div>
@@ -1309,7 +1657,7 @@ footer {
           <h3>Josaphat</h3>
           <p class="player-meta">Idade: # · Altura: 1.82m</p>
           <div class="player-stats">
-            <div><strong>0</strong><span>Jogos</span></div>
+            <div><strong>1</strong><span>Jogos</span></div>
             <div><strong>0</strong><span>Golos</span></div>
             <div><strong>0</strong><span>Assist.</span></div>
           </div>
@@ -1317,7 +1665,7 @@ footer {
       </article>
       <article class="player-card reveal" data-position="ataque">
         <div class="player-thumb">
-          <img src="imagem/17.jpeg" alt="Jogador 4">
+          <img src="imagem/es.png" alt="Jogador 4">
           <div class="player-number">17</div>
           <div class="player-overlay"><div class="player-info"><span class="position">Avançado</span></div></div>
         </div>
@@ -1390,7 +1738,7 @@ footer {
           <h3>Eliude Dezire</h3>
           <p class="player-meta">Idade: # · Altura: 1.82m</p>
           <div class="player-stats">
-            <div><strong>3</strong><span>Jogos</span></div>
+            <div><strong>4</strong><span>Jogos</span></div>
             <div><strong>0</strong><span>Golos</span></div>
             <div><strong>0</strong><span>Assist.</span></div>
           </div>
@@ -1406,7 +1754,7 @@ footer {
           <h3>MOR</h3>
           <p class="player-meta">Idade: # · Altura: 1.82m</p>
           <div class="player-stats">
-            <div><strong>7</strong><span>Jogos</span></div>
+            <div><strong>8</strong><span>Jogos</span></div>
             <div><strong>0</strong><span>Golos</span></div>
             <div><strong>1</strong><span>Assist.</span></div>
           </div>
@@ -1427,6 +1775,14 @@ footer {
     </div>
 
     <div class="fixtures-list reveal">
+
+       <div class="fixture win">
+        <div class="fixture-date">27 Set</div>
+        <div class="fixture-team">Gideão fc</div>
+        <div class="fixture-score">0 - 5</div>
+        <div class="fixture-team away">Show de Bola FC <p class="goal">Jacy 46´59´90+2</p><p class="goal">Piza 65´79´</p></div>
+        <div class="fixture-status win">V</div>
+      </div>
       <div class="fixture win">
         <div class="fixture-date">20 Set</div>
         <div class="fixture-team">Calemba2 fc<p class="goal">Geraldo 4´</p><p class="goal">Jose 88´</p></div>
